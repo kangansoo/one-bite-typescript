@@ -1,57 +1,77 @@
-// unknown 타입
-// 모든 타입의 슈퍼 타입
+// 기본 타입간의 호환성
 
-function unkownExam(){
-    let a : unknown = 1;
-    let b : unknown = 'hello';
-    let c : unknown = true;
-    let d : unknown = null;    
-    let e : unknown = undefined;
+let num1: number = 10;
+let num2: 10 = 10;
 
-    let unknownVar:unknown;
+num1 = num2;
 
-    // let num:number =  unknownVar;
-};
+// 객체 타입간의 호환성
 
-// never 타입
-// 모든 타입의 sub 타입
-
-function neverExam(){
-    function neverFunc():never{
-        while(true) {}
-    }
-
-    let num:number = neverFunc();
-    let str:string = neverFunc();
-    let bool:boolean = neverFunc();
+type Animal = {
+    name: string;
+    color: string;
 }
 
-// void 타입
-// undefined의 슈퍼타입
-
-function voidExam(){
-    function voidFunc():void {
-        console.log('hi');
-        return undefined;
-    }
-
-    let voidVar:void = undefined;
+type Dog = {
+    name: string;
+    color: string;
+    breed: string;
 }
 
-// any 타입
-// 모든 타입의 슈퍼타입이 될 수도 있고
-// 모든 타입의 서브타입이 될 수도 있음(never 빼고)
-
-function anyExam(){
-    let unknownVar:unknown;
-    let anyVar:any;
-    let undefinedVar:undefined;
-    let neverVar:never;
-
-    anyVar = unknownVar;
-    undefinedVar = anyVar;
-    // neverVar = anyVar; <- 에러
+let animal:Animal={
+    name: "기린",
+    color: "yellow",
 }
 
+let dog:Dog = {
+    name:"돌돌이",
+    color: "brown",
+    breed: "진도",
+}
+
+animal = dog;
+
+// 에러
+// dog = animal;
 
 
+
+type ProgrammingBook = {
+    name: string;
+    price: number;
+    skill: string;
+}
+
+let book:Book;
+let programmingBook:ProgrammingBook = {
+    name: "한 입 크기로 잘라먹는 리액트",
+    price: 33000,
+    skill:"reactjs",
+}
+
+book = programmingBook;
+// programmingBook=book;
+
+
+// 초과 프로퍼티 검사
+// 업캐스팅은 가능하지만 초기화 시에는 객체 리터럴에 맞게 해야함
+
+type Book = {
+    name: string;
+    price: number;
+}
+
+let book2:Book={
+    name: "한 입 크기로 잘라먹는 리액트",
+    price: 33000,
+    // skill:"reactjs", <- 에러
+}
+
+let book3: Book = programmingBook;
+
+function func(book:Book) {}
+func({
+    name: "한 입 크기로 잘라먹는 리액트",
+    price: 33000,
+})
+func(programmingBook);
