@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    //생성되는 자바스크립트 버전 관리
+    "target": "ESNext",
+    //모듈시스템 설정
+    "module":"ESNext",
+    //js파일 생성 위치 설정
+    "outDir": "dist",
+    //엄격한 타입 검사
+    //매개변수의 타입도 직접 입력해야 함
+    "strict": true,
+    //각각의 파일을 어떤 모듈로 감지할 것인가
+    //js파일에 모듈 키워드 추가(module 설정에 따라 다름)
+    "moduleDetection": "force",
+    //엄격한 null 검사
+    //null 타입이 아닌 변수에 null 값을 넣을 수 있게 허용
+    // "strictNullChecks": true,
+  },
+  //ts-node는 기본이 CommonJS
+  "ts-node":{
+    "esm": true
+  },
+  //tsc 명령어로
+//폴더 안의 모든 파일을 한 번에 컴파일
+"include":["src"]
+}
